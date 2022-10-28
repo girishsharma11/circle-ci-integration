@@ -7,7 +7,7 @@ jobs:
       - run:
           name: Deploying to Server 30
           command: |
-            ssh $SSH_USER@$SSH_HOST "/var/www/html/circleci-test/deploy.sh"
+            ssh $SSH_USER@$SSH_HOST -p 9829 "/var/www/html/circleci-test/deploy.sh"
 workflows:
   deploy:
     jobs:
