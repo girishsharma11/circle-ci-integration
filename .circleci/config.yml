@@ -1,16 +1,19 @@
 version: 2.1
 jobs:
-  run_project:
-    docker:
-      - image: circleci/node:16
+  deploy:
+    machine:
+      enabled: true
     steps:
-      - checkout
       - run:
-          name: install deps
+          name: Deploying to Server 30
           command: |
-            npm install
+            ssh $SSH_USER@$SSH_HOST "/var/www/html/circleci-test/deploy.sh"
 workflows:
-  build_test:
+  version: 2.1
+  deploy:
     jobs:
-      - run_project
+      - deploy
+      filters:
+        branches:
+          only: develop
 
