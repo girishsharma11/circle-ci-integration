@@ -2,18 +2,17 @@ version: 2.1
 jobs:
   deploy:
     machine:
-      enabled: true
+      image: ubuntu-2004:202010-01
     steps:
       - run:
           name: Deploying to Server 30
           command: |
             ssh $SSH_USER@$SSH_HOST "/var/www/html/circleci-test/deploy.sh"
 workflows:
-  version: 2.1
   deploy:
     jobs:
-      - deploy
-      filters:
-        branches:
-          only: develop
+      - deploy:
+          filters:
+            branches:
+              only: develop
 
